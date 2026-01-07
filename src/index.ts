@@ -79,6 +79,9 @@ const app = new Elysia()
     // Serve index.html
     .get('/', () => Bun.file('./views/index.html'))
 
+    // Serve chat widget (loaded via HTMX)
+    .get('/widget', () => Bun.file('./views/widget.html'))
+
     // Health check
     .get('/health', () => ({ status: 'ok', faqs: faqs.length }))
 

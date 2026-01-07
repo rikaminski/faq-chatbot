@@ -5,36 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FAQ Chatbot</title>
-  <link rel="stylesheet" href="/public/styles.css">
+  <link rel="stylesheet" href="/public/styles.css?v=2">
   <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </head>
 
 <body>
-  <div class="chat-container">
-    <header class="chat-header">
-      <h1>💬 FAQ Chatbot</h1>
-      <p>Tire suas dúvidas de forma rápida e fácil</p>
-    </header>
+  <!-- Bubble Button -->
+  <button class="chat-bubble" hx-get="/widget" hx-target="#chat-widget-container" hx-swap="innerHTML"
+    aria-label="Abrir chat">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  </button>
 
-    <main class="chat-messages" id="messages">
-      <div class="message msg-bot">
-        Olá! 👋 Como posso ajudar você hoje?
-      </div>
-    </main>
-
-    <footer class="chat-input">
-      <form hx-post="/api/chat" hx-target="#messages" hx-swap="beforeend"
-        hx-on::after-request="this.reset(); document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;">
-        <input type="text" name="query" placeholder="Digite sua pergunta..." autocomplete="off" required>
-        <button type="submit">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-          </svg>
-        </button>
-      </form>
-      <div class="htmx-indicator" id="loading">Pensando...</div>
-    </footer>
-  </div>
+  <!-- Widget Container (populated by HTMX) -->
+  <div id="chat-widget-container"></div>
 </body>
 
 </html>

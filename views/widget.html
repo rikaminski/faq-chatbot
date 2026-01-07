@@ -1,0 +1,33 @@
+<div class="chat-widget open">
+    <header class="chat-header">
+        <div class="chat-header-content">
+            <h1>💬 FAQ Chatbot</h1>
+            <p>Tire suas dúvidas de forma rápida e fácil</p>
+        </div>
+        <button class="chat-close" hx-on:click="this.closest('.chat-widget').classList.remove('open')"
+            aria-label="Fechar chat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+        </button>
+    </header>
+
+    <main class="chat-messages" id="messages">
+        <div class="message msg-bot">
+            Olá! 👋 Como posso ajudar você hoje?
+        </div>
+    </main>
+
+    <footer class="chat-input">
+        <form hx-post="/api/chat" hx-target="#messages" hx-swap="beforeend"
+            hx-on::after-request="this.reset(); document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;">
+            <input type="text" name="query" placeholder="Digite sua pergunta..." autocomplete="off" required>
+            <button type="submit">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+            </button>
+        </form>
+        <div class="htmx-indicator" id="loading">Pensando...</div>
+    </footer>
+</div>

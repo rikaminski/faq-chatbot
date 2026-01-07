@@ -23,39 +23,103 @@ body {
   background: var(--bg);
   color: var(--text);
   min-height: 100vh;
+  margin: 0;
+}
+
+/* Floating Bubble Button */
+.chat-bubble {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  color: white;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1000;
 }
 
-.chat-container {
-  width: 100%;
-  max-width: 500px;
-  height: 90vh;
-  max-height: 700px;
+.chat-bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(99, 102, 241, 0.5);
+}
+
+/* Chat Widget */
+.chat-widget {
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 48px);
+  height: 500px;
+  max-height: calc(100vh - 140px);
   background: var(--bg-light);
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+
+  /* Animation */
+  transform: scale(0.8) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: bottom right;
+}
+
+.chat-widget.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .chat-header {
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-header-content {
+  text-align: left;
 }
 
 .chat-header h1 {
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.125rem;
 }
 
 .chat-header p {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   opacity: 0.9;
+}
+
+.chat-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.chat-close:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .chat-messages {
