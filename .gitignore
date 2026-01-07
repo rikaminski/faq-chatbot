@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+.bun/
+
+# Data and cached models
+data/faqs.json
+.cache/
+onnxruntime_binding.node
+
+# Environment
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db

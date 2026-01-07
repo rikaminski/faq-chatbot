@@ -1,0 +1,77 @@
+[
+    {
+        "id": 1,
+        "pergunta": "Como faço para usar este chatbot?",
+        "resposta": "Basta digitar sua pergunta no campo abaixo e pressionar Enter ou clicar no botão de enviar! 🚀"
+    },
+    {
+        "id": 2,
+        "pergunta": "Este chatbot usa inteligência artificial?",
+        "resposta": "Sim! Usamos um modelo de IA para entender o significado da sua pergunta e encontrar a resposta mais relevante no nosso FAQ."
+    },
+    {
+        "id": 3,
+        "pergunta": "Posso personalizar as perguntas e respostas?",
+        "resposta": "Claro! Edite o arquivo data/faqs.json com suas próprias perguntas e respostas, depois rode 'bun run precompute' para atualizar."
+    },
+    {
+        "id": 4,
+        "pergunta": "O chatbot funciona offline?",
+        "resposta": "Sim! Após a primeira execução, o modelo de IA fica em cache e funciona 100% localmente, sem precisar de internet."
+    },
+    {
+        "id": 5,
+        "pergunta": "Qual tecnologia é usada neste projeto?",
+        "resposta": "Usamos Bun como runtime JavaScript, Elysia como servidor web, HTMX para interatividade e um modelo de embeddings local para busca semântica."
+    },
+    {
+        "id": 6,
+        "pergunta": "Como alterar as cores do chat?",
+        "resposta": "Você pode personalizar as cores editando as variáveis CSS no arquivo `public/styles.css`. O tema usa variáveis como `--primary` e `--bg` para facilitar a mudança."
+    },
+    {
+        "id": 7,
+        "pergunta": "O chat funciona bem em celulares?",
+        "resposta": "Sim! O design é totalmente responsivo e foi otimizado para proporcionar uma excelente experiência tanto em dispositivos móveis quanto em desktops."
+    },
+    {
+        "id": 8,
+        "pergunta": "Posso integrar este chat em um site que já existe?",
+        "resposta": "Sim! Você pode integrar o chat como um iframe ou copiar a estrutura do HTML e CSS para dentro do seu projeto existente."
+    },
+    {
+        "id": 9,
+        "pergunta": "Quanto custa manter este chatbot online?",
+        "resposta": "O custo é baixíssimo. Como ele roda localmente e não usa APIs pagas (como OpenAI), você só paga a hospedagem do seu servidor ou VPS."
+    },
+    {
+        "id": 10,
+        "pergunta": "Como faço o deploy em produção?",
+        "resposta": "A maneira mais fácil é usar o Docker. Basta rodar `docker build` com o Dockerfile incluso e subir a imagem para o seu servidor."
+    },
+    {
+        "id": 11,
+        "pergunta": "O chatbot guarda histórico das conversas?",
+        "resposta": "Esta versão minimalista não armazena o histórico das conversas em banco de dados, priorizando a privacidade do usuário e a leveza do sistema."
+    },
+    {
+        "id": 12,
+        "pergunta": "Posso usar imagens ou links nas respostas?",
+        "resposta": "Sim! O chatbot suporta HTML básico nas respostas. Você pode incluir links, negrito, itálico e até imagens usando tags HTML padrão."
+    },
+    {
+        "id": 13,
+        "pergunta": "E se eu tiver milhares de perguntas?",
+        "resposta": "Para milhares de perguntas, recomendamos usar um banco de dados vetorial (como ChromaDB ou Pinecone). Para até algumas centenas de perguntas, esta versão em JSON é extremamente rápida."
+    },
+    {
+        "id": 14,
+        "pergunta": "Como mudar o nome do chatbot no topo?",
+        "resposta": "O título e subtítulo podem ser alterados diretamente no arquivo `views/index.html`, dentro da tag `<header>`."
+    },
+    {
+        "id": 15,
+        "pergunta": "Como o modelo de IA é atualizado?",
+        "resposta": "Se você quiser usar um modelo diferente, pode alterar a configuração em `src/embeddings.ts`. O projeto já vem configurado com um modelo leve e eficiente."
+    }
+]
