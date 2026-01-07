@@ -10,12 +10,14 @@ let embedder: FeatureExtractionPipeline | null = null;
 async function getEmbedder(): Promise<FeatureExtractionPipeline> {
     if (!embedder) {
         console.log('🔄 Loading embedding model (first time only)...');
-        embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', {
+        // Type cast to any is needed because the pipeline function has too many overloads
+        // which causes TypeScript to hit a complexity limit when inferring the return type.
+        embedder = await (pipeline as any)('feature-extraction', /*'Xenova/all-MiniLM-L6-v2',*/ 'Xenova/multilingual-e5-small' ,{
             dtype: 'fp32',
         });
         console.log('✅ Embedding model loaded!');
     }
-    return embedder;
+    return embedder!;
 }
 
 /** Generate embedding for a single text */

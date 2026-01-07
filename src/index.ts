@@ -110,7 +110,17 @@ const app = new Elysia()
             const queryEmbed = await getEmbedding(query);
             const results = findBestMatches(queryEmbed, faqs, 3);
 
-            if (results.length === 0 || results[0].similarity < 0.60) {
+            // Debug logging
+            const threshold = 0.60;
+            console.log(`\n🔍 Query: "${query}"`);
+            console.log(`   Threshold: ${threshold}`);
+            results.forEach((r, i) => {
+                const status = i === 0 && r.similarity >= threshold ? '✅' : '  ';
+                console.log(`   ${status} [${i + 1}] ${r.similarity.toFixed(4)} | "${r.item.pergunta.slice(0, 60)}..."`);
+            });
+
+            if (results.length === 0 || results[0].similarity < threshold) {
+                console.log(`   ❌ Nenhum match acima do threshold`);
                 response += renderMessage(noAnswerMessage, 'bot');
                 return response;
             }
