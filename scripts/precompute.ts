@@ -2,7 +2,7 @@
  * Pre-compute embeddings for all FAQ items
  * Run: bun run precompute
  */
-import { getEmbedding } from '../src/embeddings';
+import { getPassageEmbedding } from '../src/embeddings';
 import type { FAQItem } from '../src/types';
 
 const inputPath = './data/faqs.example.json';
@@ -28,7 +28,7 @@ async function main() {
         console.log(`[${i + 1}/${faqs.length}] Processing: "${faq.pergunta.slice(0, 50)}..."`);
 
         try {
-            faq.embedding = await getEmbedding(faq.pergunta);
+            faq.embedding = await getPassageEmbedding(faq.pergunta);
             console.log(`  ✅ Generated ${faq.embedding.length}-dim embedding`);
         } catch (e) {
             console.error(`  ❌ Error:`, e);

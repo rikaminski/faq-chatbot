@@ -113,17 +113,33 @@ const app = new Elysia()
             const queryEmbed = await getEmbedding(query);
             const results = findBestMatches(queryEmbed, faqs, 3);
 
+            // Scoring parameters
+            const threshold = 0.85;    // Minimum similarity for a match
+            const minGap = 0.02;       // Minimum gap between 1st and 2nd result
+
+            // Calculate gap between top results
+            const gap = results.length >= 2
+                ? results[0].similarity - results[1].similarity
+                : 1.0;
+
             // Debug logging
-            const threshold = 0.60;
             console.log(`\n🔍 Query: "${query}"`);
-            console.log(`   Threshold: ${threshold}`);
+            console.log(`   Threshold: ${threshold} | MinGap: ${minGap} | ActualGap: ${gap.toFixed(4)}`);
             results.forEach((r, i) => {
-                const status = i === 0 && r.similarity >= threshold ? '✅' : '  ';
-                console.log(`   ${status} [${i + 1}] ${r.similarity.toFixed(4)} | "${r.item.pergunta.slice(0, 60)}..."`);
+                const status = i === 0 && r.similarity >= threshold && gap >= minGap ? '✅' : '  ';
+                console.log(`   ${status} [${i + 1}] ${r.similarity.toFixed(4)} | "${r.item.pergunta.slice(0, 50)}..."`);
             });
 
-            if (results.length === 0 || results[0].similarity < threshold) {
-                console.log(`   ❌ Nenhum match acima do threshold`);
+            // Check if match is good enough
+            const isGoodMatch = results.length > 0
+                && results[0].similarity >= threshold
+                && gap >= minGap;
+
+            if (!isGoodMatch) {
+                const reason = results[0]?.similarity < threshold
+                    ? 'score baixo'
+                    : 'gap insuficiente (respostas muito similares)';
+                console.log(`   ❌ Rejeitado: ${reason}`);
                 response += renderMessage(noAnswerMessage, 'bot');
                 return response;
             }
